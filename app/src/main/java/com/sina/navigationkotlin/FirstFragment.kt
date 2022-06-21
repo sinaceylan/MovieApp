@@ -19,6 +19,8 @@ import com.sina.navigationkotlin.services.MovieApiInterface
 import com.sina.navigationkotlin.services.MovieApiService
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_first.view.*
+import kotlinx.android.synthetic.main.fragment_second.*
+import kotlinx.android.synthetic.main.fragment_second.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,7 +43,6 @@ class FirstFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
         view.rv_movies_list.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL,false)
         view.rv_movies_list.setHasFixedSize(true)
-        //view.rv_movies_list.set
 
         view.rv_movies_list2.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL,false)
         view.rv_movies_list2.setHasFixedSize(true)
@@ -51,6 +52,7 @@ class FirstFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
         view.rv_movies_list4.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL,false)
         view.rv_movies_list4.setHasFixedSize(true)
+
 
         return view
     }
@@ -107,6 +109,7 @@ class FirstFragment : Fragment(), MovieAdapter.OnItemClickListener {
             rv_movies_list4.adapter = MovieAdapter(movies, this)
 
         }
+
     }
 
     private fun getMovieData(callback: (List<Movie>) -> Unit) {
@@ -169,6 +172,8 @@ class FirstFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
         })
     }
+
+
 
 
 }

@@ -2,6 +2,7 @@ package com.sina.navigationkotlin
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.LocusId
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,44 +13,59 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sina.navigationkotlin.models.Movie
+import com.sina.navigationkotlin.models.MovieResponse
+import com.sina.navigationkotlin.services.MovieApiInterface
+import com.sina.navigationkotlin.services.MovieApiService
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_second.*
 import kotlinx.android.synthetic.main.fragment_second.view.*
 import kotlinx.android.synthetic.main.movie_item.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class SecondFragment : Fragment() {
+class SecondFragment : Fragment(), MovieAdapter.OnItemClickListener {
+
+    override fun onItemClick(movie: Movie) {
+        Log.d("MOVIE", movie.title ?: "-")
+        (activity as? MainActivity)?.addMovieDetail(movie)
+    }
 
     var movie: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         Log.d("FRAGMENT_SECOND", "onCreate")
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
 
-        /*
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().navigate(R.id.activityMainLay)
-            }
-        }
-        */
+        var view = inflater.inflate(R.layout.fragment_second, container, false)
 
+        view.recycleViewSimilarMovies.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL,false)
+        view.recycleViewSimilarMovies.setHasFixedSize(true)
 
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        return view
     }
 
     override fun onResume() {
         super.onResume()
+
+        movie.let {
+            fetchSimilarMovies(movieId = it!!.id!!, callback = { movies: List<Movie> ->
+                recycleViewSimilarMovies.adapter = MovieAdapter(movies, this)
+            })
+        }
 
         Log.d("FRAGMENT_SECOND", "onResume")
     }
@@ -86,6 +102,23 @@ class SecondFragment : Fragment() {
             Glide.with(view).load("https://image.tmdb.org/t/p/w500/" + it!!.poster).into(view.imageView)
         }
     }
+
+
+    private fun fetchSimilarMovies(movieId: String, callback: (List<Movie>) -> Unit){
+        val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
+        apiService.getMovieById(movieId).enqueue(object : Callback<MovieResponse>{
+
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                return callback(response.body()!!.movies)
+            }
+
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+
+            }
+
+        })
+    }
+
 
 }
 

@@ -1,8 +1,11 @@
 package com.sina.navigationkotlin.services
 
+import com.sina.navigationkotlin.BuildConfig
 import com.sina.navigationkotlin.models.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MovieApiInterface{
     @GET("/3/movie/popular?api_key=a3f7af2f8e55cf0e73fe3cd8d2b0c423")
@@ -16,6 +19,11 @@ interface MovieApiInterface{
 
     @GET("/3/movie/now_playing?api_key=a3f7af2f8e55cf0e73fe3cd8d2b0c423")
     fun getNowPlayingMovieList(): Call<MovieResponse>
+
+    @GET("/3/movie/{id}/similar?api_key=a3f7af2f8e55cf0e73fe3cd8d2b0c423")
+    fun getMovieById(
+        @Path("id") id:String) :Call<MovieResponse>
+
 
 
 

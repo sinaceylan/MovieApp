@@ -20,15 +20,30 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="520dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="0dp"
+
+                app:cardElevation="7dp">
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="360dp"
-                    android:layout_height="307dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
                     tools:srcCompat="@tools:sample/avatars"
                     />
+
+            </androidx.cardview.widget.CardView>
 
 
                 <TextView
@@ -75,6 +90,21 @@
                     android:text="Overview"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/similarMovies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:text="Similar Movies"
+                android:textColor="@color/white" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleViewSimilarMovies"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black" />
 
 
         </LinearLayout>
