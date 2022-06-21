@@ -1,6 +1,9 @@
 package com.sina.navigationkotlin
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
@@ -37,9 +40,30 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
-        if (count == 0) {
-            super.onBackPressed()
-            //additional code
+        if (count == 1) {
+            //super.onBackPressed()
+
+            /*
+            val builder = AlertDialog.Builder(applicationContext)
+            builder.setMessage("Are you sure to exit ?")
+            builder.setCancelable(true)
+            builder.setNegativeButton("No",DialogInterface.OnClickListener(dialogInterface, i-> dialogInterface.cancel()))
+            */
+
+            val eBuilder = AlertDialog.Builder(this)
+            eBuilder.setTitle("Exit")
+            eBuilder.setIcon(R.drawable.ic_action_name)
+            eBuilder.setMessage("Do you want to exit ?")
+            eBuilder.setPositiveButton("Yes"){
+                Dialog,which->
+                finish()
+            }
+            eBuilder.setNegativeButton("Cancel"){
+                Dialog,which->
+            }
+            val createBuild= eBuilder.create()
+            createBuild.show()
+
         } else {
             supportFragmentManager.popBackStack()
         }
