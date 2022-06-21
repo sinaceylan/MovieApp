@@ -4,8 +4,29 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/NavigationKotlin/app/src/main/res/layout/activity_main.xml" value="0.15715579710144928" />
-        <entry key="..\:/AndroidStudioProjects/NavigationKotlin/app/src/main/res/layout/fragment_first.xml" value="0.15715579710144928" />
-        <entry key="..\:/AndroidStudioProjects/NavigationKotlin/app/src/main/res/layout/fragment_second.xml" value="0.15715579710144928" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin/app/src/main/res/layout/fragment_first.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin/app/src/main/res/layout/fragment_second.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin/app/src/main/res/layout/movie_item.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin3/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin3/app/src/main/res/layout/fragment_first.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin3/app/src/main/res/layout/fragment_second.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin3/app/src/main/res/layout/movie_item.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin3/app/src/main/res/layout/movie_item2.xml" value="0.2368659420289855" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin4/app/src/main/res/drawable/custom_input.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin4/app/src/main/res/font/bebas_neue_font_family.xml" value="0.2765625" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin4/app/src/main/res/layout/activity_main.xml" value="0.2078804347826087" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin4/app/src/main/res/layout/card_cell.xml" value="0.23731884057971014" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin4/app/src/main/res/layout/custom_input.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin4/app/src/main/res/layout/fragment_first.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin4/app/src/main/res/layout/fragment_second.xml" value="0.18333333333333332" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin4/app/src/main/res/layout/movie_item.xml" value="0.4" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin4/app/src/main/res/layout/s.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/NavigationKotlin4/app/src/main/res/layout/toolbar.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/movie_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/movie_item2.xml" value="0.1" />
       </map>
     </option>
   </component>
