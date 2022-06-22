@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.movie_banner.view.*
 class MovieAdapter(
     private val movies: List<Movie>,
     private val listener: OnItemClickListener
-
     ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
     interface OnItemClickListener {
@@ -20,10 +19,9 @@ class MovieAdapter(
     }
 
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        private val IMAGE_BASE ="https://image.tmdb.org/t/p/w500/"
 
         fun bindMovie(movie: Movie, listener: OnItemClickListener){
-            Glide.with(itemView).load(IMAGE_BASE + movie.poster).into(itemView.movie_poster)
+            Glide.with(itemView).load(APIConstants.imageBaseUrl + movie.poster).into(itemView.movie_poster)
             itemView.setOnClickListener{ listener.onItemClick(movie) }
         }
     }
