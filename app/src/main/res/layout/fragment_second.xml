@@ -17,7 +17,7 @@
         <LinearLayout
             android:id="@+id/margin"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -92,19 +92,37 @@
                     android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/casts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:text="Cast"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/castRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <TextView
                 android:id="@+id/similarMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="16dp"
                 android:text="Similar Movies"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleViewSimilarMovies"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/black" />
+                android:background="@color/black"
+                />
 
 
         </LinearLayout>

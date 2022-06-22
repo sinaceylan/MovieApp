@@ -7,10 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sina.navigationkotlin.models.Movie
@@ -19,8 +15,6 @@ import com.sina.navigationkotlin.services.MovieApiInterface
 import com.sina.navigationkotlin.services.MovieApiService
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_first.view.*
-import kotlinx.android.synthetic.main.fragment_second.*
-import kotlinx.android.synthetic.main.fragment_second.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +26,9 @@ class FirstFragment : Fragment(), MovieAdapter.OnItemClickListener {
         Log.d("MOVIE", movie.title ?: "-")
         (activity as? MainActivity)?.addMovieDetail(movie)
     }
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +57,7 @@ class FirstFragment : Fragment(), MovieAdapter.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        
         //getBothMovieData()
         Log.d("FRAGMENT_FIRST", "onCreate")
     }
@@ -172,7 +170,6 @@ class FirstFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
         })
     }
-
 
 
 

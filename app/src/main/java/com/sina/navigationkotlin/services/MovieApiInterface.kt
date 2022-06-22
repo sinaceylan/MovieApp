@@ -1,6 +1,7 @@
 package com.sina.navigationkotlin.services
 
 import com.sina.navigationkotlin.BuildConfig
+import com.sina.navigationkotlin.models.CastResponse
 import com.sina.navigationkotlin.models.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -24,7 +25,9 @@ interface MovieApiInterface{
     fun getMovieById(
         @Path("id") id:String) :Call<MovieResponse>
 
-
+    @GET("/3/movie/{id}/credits?api_key=a3f7af2f8e55cf0e73fe3cd8d2b0c423")
+    fun getCastById(
+        @Path("id") id:String) :Call<CastResponse>
 
 
 }
