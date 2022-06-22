@@ -1,7 +1,6 @@
 package com.sina.navigationkotlin
 
 import android.content.Context
-import android.content.LocusId
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,21 +10,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.sina.navigationkotlin.models.Cast
-import com.sina.navigationkotlin.models.CastResponse
+import com.sina.navigationkotlin.models.MovieCast
+import com.sina.navigationkotlin.models.MovieCastResponse
 import com.sina.navigationkotlin.models.Movie
 import com.sina.navigationkotlin.models.MovieResponse
 import com.sina.navigationkotlin.services.MovieApiInterface
 import com.sina.navigationkotlin.services.MovieApiService
-import kotlinx.android.synthetic.main.fragment_second.*
-import kotlinx.android.synthetic.main.fragment_second.view.*
-import kotlinx.android.synthetic.main.profile_card.view.*
+import kotlinx.android.synthetic.main.fragment_movie_detail.*
+import kotlinx.android.synthetic.main.fragment_movie_detail.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.StringBuilder
 
-class SecondFragment : Fragment(), MovieAdapter.OnItemClickListener {
+class MovieDetailFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
     override fun onItemClick(movie: Movie) {
         Log.d("MOVIE", movie.title ?: "-")
@@ -33,21 +30,18 @@ class SecondFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     var movie: Movie? = null
-    var cast: Cast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         Log.d("FRAGMENT_SECOND", "onCreate")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-
     ): View? {
 
-        var view = inflater.inflate(R.layout.fragment_second, container, false)
+        var view = inflater.inflate(R.layout.fragment_movie_detail, container, false)
 
         view.recycleViewSimilarMovies.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL,false)
         view.recycleViewSimilarMovies.setHasFixedSize(true)
@@ -57,7 +51,6 @@ class SecondFragment : Fragment(), MovieAdapter.OnItemClickListener {
 
         return view
     }
-
     override fun onResume() {
         super.onResume()
 
@@ -65,36 +58,30 @@ class SecondFragment : Fragment(), MovieAdapter.OnItemClickListener {
             fetchSimilarMovies(movieId = it!!.id!!, callback = { movies: List<Movie> ->
                 recycleViewSimilarMovies.adapter = MovieAdapter(movies, this)
             })
-
-            getCastData(castId = it!!.id!!, callback = {casts:List<Cast> ->
-                castRecycleView.adapter = CastAdapter(casts)
+            getCastData(castId = it!!.id!!, callback = { movieCasts:List<MovieCast> ->
+                castRecycleView.adapter = CastAdapter(movieCasts)
             })
         }
-
         Log.d("FRAGMENT_SECOND", "onResume")
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         Log.d("FRAGMENT_SECOND", "onAttach")
     }
 
     override fun onDetach() {
         super.onDetach()
-
         Log.d("FRAGMENT_SECOND", "onDetach")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
         Log.d("FRAGMENT_SECOND", "onDestroy")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         this.movie = requireArguments().get("movie") as? Movie
 
         this.movie.let {
@@ -104,20 +91,8 @@ class SecondFragment : Fragment(), MovieAdapter.OnItemClickListener {
             view.voteAvarageText.setText("Vote Average: "+ it!!.average.toString())
 
             Glide.with(view).load("https://image.tmdb.org/t/p/w500/" + it!!.poster).into(view.imageView)
-
-
         }
-        /*
-        this.cast = requireArguments().get("cast") as? Cast
-
-        this.cast.let {
-            view.actorName.setText(it!!.name)
-            view.characterName.setText(it!!.character)
-        }
-        */
     }
-
-
     private fun fetchSimilarMovies(movieId: String, callback: (List<Movie>) -> Unit){
         val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
         apiService.getMovieById(movieId).enqueue(object : Callback<MovieResponse>{
@@ -125,32 +100,22 @@ class SecondFragment : Fragment(), MovieAdapter.OnItemClickListener {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 return callback(response.body()!!.movies)
             }
-
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-
             }
-
         })
     }
 
-    private fun getCastData(castId: String, callback: (List<Cast>) -> Unit){
+    private fun getCastData(castId: String, callback: (List<MovieCast>) -> Unit){
         val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
-        apiService.getCastById(castId).enqueue(object : Callback<CastResponse>{
+        apiService.getCastById(castId).enqueue(object : Callback<MovieCastResponse>{
 
-            override fun onResponse(call: Call<CastResponse>, response: Response<CastResponse>) {
-                return callback(response.body()!!.casts)
+            override fun onResponse(call: Call<MovieCastResponse>, responseMovie: Response<MovieCastResponse>) {
+                return callback(responseMovie.body()!!.movieCasts)
             }
-
-            override fun onFailure(call: Call<CastResponse>, t: Throwable) {
-
+            override fun onFailure(call: Call<MovieCastResponse>, t: Throwable) {
             }
-
         })
     }
-
-
-
-
 }
 
 

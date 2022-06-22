@@ -6,5 +6,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Navigation Kotlin"
+rootProject.name = "Movie App"
 include ':app'

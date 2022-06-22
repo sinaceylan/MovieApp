@@ -6,7 +6,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment"
+    tools:context=".MainFragment"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar"/>
@@ -42,7 +42,7 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_movies_list"
+                android:id="@+id/rv_popular_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp"
 
@@ -61,7 +61,7 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_movies_list2"
+                android:id="@+id/rv_upcoming_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 
@@ -78,7 +78,7 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_movies_list3"
+                android:id="@+id/rv_topRated_movies"
                 android:layout_width="match_parent"
                 android:layout_height="136dp"
                 />
@@ -96,7 +96,7 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_movies_list4"
+                android:id="@+id/rv_now_playing"
                 android:layout_width="match_parent"
                 android:layout_height="136dp" />
 

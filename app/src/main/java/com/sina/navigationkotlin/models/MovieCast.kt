@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import kotlinx.android.parcel.Parcelize;
 
 @Parcelize
-data class Cast(
+data class MovieCast(
     @SerializedName("id")
     val id : String?,
 

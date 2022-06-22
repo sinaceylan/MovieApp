@@ -25,6 +25,5 @@ data class Movie(
     val over: String?
 
 ) : Parcelable{
-    constructor() : this("", "", "", "", null,"")
-}
+    constructor() : this("", "", "", "", null,"") }
 

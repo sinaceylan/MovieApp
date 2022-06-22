@@ -1,17 +1,12 @@
 package com.sina.navigationkotlin
 
-import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.sina.navigationkotlin.models.Cast
 import com.sina.navigationkotlin.models.Movie
 
 class MainActivity : AppCompatActivity() {
@@ -24,11 +19,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     fun showMainList() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            add<FirstFragment>(R.id.fragmentContainerView)
+            add<MainFragment>(R.id.fragmentContainerView)
             addToBackStack("movie_navigation_stack")
         }
     }
@@ -36,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     fun addMovieDetail(movie: Movie) {
         val bundle = bundleOf("movie" to movie)
         supportFragmentManager.commit {
-            replace<SecondFragment>(R.id.fragmentContainerView, args = bundle)
+            replace<MovieDetailFragment>(R.id.fragmentContainerView, args = bundle)
             setReorderingAllowed(true)
             addToBackStack("movie_navigation_stack")
         }
@@ -45,14 +39,6 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
         if (count == 1) {
-            //super.onBackPressed()
-
-            /*
-            val builder = AlertDialog.Builder(applicationContext)
-            builder.setMessage("Are you sure to exit ?")
-            builder.setCancelable(true)
-            builder.setNegativeButton("No",DialogInterface.OnClickListener(dialogInterface, i-> dialogInterface.cancel()))
-            */
 
             val eBuilder = AlertDialog.Builder(this)
             eBuilder.setTitle("Exit")
@@ -67,7 +53,6 @@ class MainActivity : AppCompatActivity() {
             }
             val createBuild= eBuilder.create()
             createBuild.show()
-
         } else {
             supportFragmentManager.popBackStack()
         }
