@@ -90,8 +90,8 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun getPopularMovieDatas(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
-        apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
+        val apiService = MovieApiService.getInstance(requireContext())?.create(MovieApiInterface::class.java)
+        apiService?.getMovieList()?.enqueue(object : Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
             }
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
@@ -101,8 +101,8 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun getUpcomingMoviesDatas(callback: (List<Movie>) -> Unit){
-        val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
-        apiService.getUpcomingMovieList().enqueue(object : Callback<MovieResponse>{
+        val apiService = MovieApiService.getInstance(requireContext())?.create(MovieApiInterface::class.java)
+        apiService?.getUpcomingMovieList()?.enqueue(object : Callback<MovieResponse>{
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 return callback(response.body()!!.movies)
             }
@@ -112,8 +112,8 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun getTopRatedMovies(callback: (List<Movie>) -> Unit){
-        val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
-        apiService.getTopRatedMovieList().enqueue(object : Callback<MovieResponse>{
+        val apiService = MovieApiService.getInstance(requireContext())?.create(MovieApiInterface::class.java)
+        apiService?.getTopRatedMovieList()?.enqueue(object : Callback<MovieResponse>{
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 return callback(response.body()!!.movies)
             }
@@ -123,8 +123,8 @@ class MainFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun getNowPlayingMoviesData(callback: (List<Movie>) -> Unit){
-        val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
-        apiService.getNowPlayingMovieList().enqueue(object : Callback<MovieResponse>{
+        val apiService = MovieApiService.getInstance(requireContext())?.create(MovieApiInterface::class.java)
+        apiService?.getNowPlayingMovieList()?.enqueue(object : Callback<MovieResponse>{
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 return callback(response.body()!!.movies)
             }

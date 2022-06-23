@@ -54,11 +54,11 @@ class MovieDetailFragment : Fragment(), MovieAdapter.OnItemClickListener {
     override fun onResume() {
         super.onResume()
 
-        movie.let {
-            fetchSimilarMovies(movieId = it!!.id!!, callback = { movies: List<Movie> ->
+        movie?.let {
+            fetchSimilarMovies(movieId = it.id!!, callback = { movies: List<Movie> ->
                 recycleViewSimilarMovies.adapter = MovieAdapter(movies, this)
             })
-            getCastData(castId = it!!.id!!, callback = { movieCasts:List<MovieCast> ->
+            getCastData(castId = it.id!!, callback = { movieCasts:List<MovieCast> ->
                 castRecycleView.adapter = CastAdapter(movieCasts)
             })
         }
@@ -84,18 +84,18 @@ class MovieDetailFragment : Fragment(), MovieAdapter.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         this.movie = requireArguments().get("movie") as? Movie
 
-        this.movie.let {
-            view.textView4.setText(it!!.title)
-            view.textView5.setText(it!!.over )
-            view.relaseDateText.setText("Release Date: " + it!!.release)
-            view.voteAvarageText.setText("Vote Average: "+ it!!.average.toString())
+        this.movie?.let {
+            view.textView4.setText(it.title)
+            view.textView5.setText(it.over )
+            view.relaseDateText.setText("Release Date: " + it.release)
+            view.voteAvarageText.setText("Vote Average: "+ it.average.toString())
 
-            Glide.with(view).load("https://image.tmdb.org/t/p/w500/" + it!!.poster).into(view.imageView)
+            Glide.with(view).load("https://image.tmdb.org/t/p/w500/" + it.poster).into(view.imageView)
         }
     }
     private fun fetchSimilarMovies(movieId: String, callback: (List<Movie>) -> Unit){
-        val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
-        apiService.getMovieById(movieId).enqueue(object : Callback<MovieResponse>{
+        val apiService = MovieApiService.getInstance(requireContext())?.create(MovieApiInterface::class.java)
+        apiService?.getMovieById(movieId)?.enqueue(object : Callback<MovieResponse>{
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 return callback(response.body()!!.movies)
@@ -106,8 +106,8 @@ class MovieDetailFragment : Fragment(), MovieAdapter.OnItemClickListener {
     }
 
     private fun getCastData(castId: String, callback: (List<MovieCast>) -> Unit){
-        val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
-        apiService.getCastById(castId).enqueue(object : Callback<MovieCastResponse>{
+        val apiService = MovieApiService.getInstance(requireContext())?.create(MovieApiInterface::class.java)
+        apiService?.getCastById(castId)?.enqueue(object : Callback<MovieCastResponse>{
 
             override fun onResponse(call: Call<MovieCastResponse>, responseMovie: Response<MovieCastResponse>) {
                 return callback(responseMovie.body()!!.movieCasts)
@@ -117,5 +117,3 @@ class MovieDetailFragment : Fragment(), MovieAdapter.OnItemClickListener {
         })
     }
 }
-
-
